@@ -58,4 +58,4 @@ Tags: Book, Notion, Python
     
 3. 检查
     
-    ![屏幕录制2022-02-09 上午10.51.10.mov](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_屏幕录制2022-02-09_上午10.51.10.2022-02-10%21_31_31.gif)
+    ![屏幕录制](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_屏幕录制2022-02-09_上午10.51.10.2022-02-10%21_31_31.gif)
