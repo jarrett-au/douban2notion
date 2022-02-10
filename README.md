@@ -5,8 +5,6 @@ Tags: Book, Notion, Python
 
 # 脚本下载及运行环境
 
----
-
 ## 脚本下载
 
 [book2notion.py](Python%E6%8A%93%E5%8F%96%E8%B1%86%E7%93%A3%E5%BD%B1%E9%9F%B3%E4%BF%A1%E6%81%AF%E5%AF%BC%E5%85%A5Notion%203a82e824ca204cb38de08f31292d46e0/book2notion.py)
