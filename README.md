@@ -14,7 +14,7 @@ Tags: Book, Notion, Python
 ## 系统环境
 
 - Python3运行环境
-- 请确保 Python 安装了 `lxml` 、`requests` 、`re` 、`beautifulsoup4`模块（脚本需要使用）
+- 请确保 Python 安装了 `requests`、 `beautifulsoup4`模块（脚本需要使用）
 
 # 使用步骤
 
