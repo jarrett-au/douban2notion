@@ -1,12 +1,19 @@
 from parser import Parser
 import requests
-import sys
+import argparse
 
 # 需自行修改数据库id及api_token
-NOTION_API_TOKEN = "secret_sSzuaFEIjthAlAIK93IoVDkzFuBwk31ifUQ8I15DJaU"
-BOOK_DATABASE_ID = "a73772cc3b45446bb4fc03a2e9265af0"
-MOVIE_DATABASE_ID = "2f3716cf38994d0182116cceee00330a"
-TV_DATABASE_ID = "c0c9c1baace84e1fb4e79f307022f71c"
+NOTION_API_TOKEN = ""
+BOOK_DATABASE_ID = ""
+MOVIE_DATABASE_ID = ""
+TV_DATABASE_ID = ""
+
+arg_parser = argparse.ArgumentParser()
+arg_parser.add_argument('-m',
+                        '--mode',
+                        default='book',
+                        help='输入模式，book/movie/tv')
+arg_parser.add_argument('-i', '--id', help='输入subject_id')
 
 
 def update_notion_database(url, mode):
@@ -35,7 +42,6 @@ def update_notion_database(url, mode):
     # 根据POST返回结构打印信息
     if (str(NotionData.status_code) == "200"):
         properties = list(body['properties'].values())
-        print(properties)
         name = properties[0]['title'][0]['text']['content'],
         tags = ', '.join(
             [tag['name'] for tag in properties[1]['multi_select']]),
@@ -51,13 +57,14 @@ def update_notion_database(url, mode):
 
 
 if __name__ == '__main__':
-    mode = sys.argv[1]
+    args = arg_parser.parse_args()
+    mode = args.mode
     if mode not in ['book', 'movie', 'tv']:
-        raise ValueError('mode must be one of {book, movie, tv}')
+        raise KeyError('mode must be one of {book, movie, tv}')
     if mode == 'tv':
         opt = 'movie'
     else:
         opt = mode
-    subject_id = sys.argv[2]
+    subject_id = args.id
     url = f'https://www.douban.com/{opt}/subject/{subject_id}/'
     update_notion_database(url, mode)
