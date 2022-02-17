@@ -7,7 +7,7 @@ class Parser:
         self.url = url
         self.notion_database_id = notion_database_id
 
-    def get_request(self):
+    def get_html(self):
         headers = {
             'User-Agent':
             'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
@@ -16,7 +16,7 @@ class Parser:
         return response.text
 
     def book_parser(self):
-        soup = BeautifulSoup(self.get_request(), 'lxml')
+        soup = BeautifulSoup(self.get_html(), 'lxml')
         # 提取书名，封面，评分
         mainpic = soup.find('div', id='mainpic')
         book_name = mainpic.img['alt']
@@ -80,6 +80,7 @@ class Parser:
                 }
             }
         }
+        # 标签处理
         for tag in book_tags[:3]:
             if tag not in [author_name, book_name]:
                 body['properties']['书籍分类']['multi_select'].append(
@@ -87,7 +88,7 @@ class Parser:
         return body
 
     def movie_parser(self):
-        soup = BeautifulSoup(self.get_request(), 'lxml')
+        soup = BeautifulSoup(self.get_html(), 'lxml')
         # 提取电影名称，封面，评分
         mainpic = soup.find('div', id='mainpic')
         movie_name = mainpic.img['alt']
@@ -99,16 +100,17 @@ class Parser:
         info = soup.find('div', id='info').get_text().strip().split('\n')
         info = [i.split(': ') for i in info]
 
-        if 'http' in info[4][1]:
+        # 若存在官网则国家取下一个元素
+        if info[4][0] == '官方网站':
             movie_country = info[5][1]
         else:
             movie_country = info[4][1]
-
-        movie_tag = info[3][1]
-        if '/' in movie_tag:
-            movie_tags = movie_tag.split(' / ')
+        # 多国家处理
         if '/' in movie_country:
             movie_country = movie_country.split(' / ')[0]
+
+        # 提取标签
+        movie_tag = info[3][1]
 
         body = {
             "parent": {
@@ -155,8 +157,13 @@ class Parser:
                 },
             }
         }
-        for tag in movie_tags:
-            body['properties']['影片类型']['multi_select'].append({
-                "name": tag,
-            })
+        # 标签处理
+        if '/' in movie_tag:
+            movie_tags = movie_tag.split(' / ')
+            for tag in movie_tags:
+                body['properties']['影片类型']['multi_select'].append(
+                    {"name": tag})
+        else:
+            body['properties']['影片类型']['multi_select'].append(
+                {"name": movie_tag})
         return body
