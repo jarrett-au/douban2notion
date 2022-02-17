@@ -1,6 +1,6 @@
-# Python抓取豆瓣影音信息导入Notion
+# Python抓取豆瓣图书、影视导入Notion
 
-利用 python 通过 Notion API 将豆瓣影音信息导入 Notion，包括：书籍、电视剧及电影。
+利用 python 通过 Notion API 将豆瓣图书及影视信息导入 Notion，包括：书籍、电视剧及电影。
 
 ![demo](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/14_demo.gif)
 
@@ -46,10 +46,10 @@
     
     ![TOKEN](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/14_T6LzEG.png)
     
-2. 运行一下命令：
-    > python douban2notion.py -m [mode] -i [subject_id]
+2. 运行以下命令：
+    > python douban2notion.py -m [mode] -s [subject_id]
     - `-h`: 帮助
     - `-m`: book / movie / tv
-    - `-i`: subject_id
-    - 
-        ![subject_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png)
+    - `-s`: subject_id
+
+    ![subject_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png)
