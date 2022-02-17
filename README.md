@@ -1,6 +1,6 @@
 # Python抓取豆瓣图书、影视导入Notion
 
-利用 python 通过 Notion API 将豆瓣图书及影视信息导入 Notion，包括：书籍、电视剧及电影。
+利用 python 通过 Notion API 将豆瓣图书及影视信息导入 Notion，具体导入格式请参考下方模板的数据库样式。
 
 ![demo](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/14_demo.gif)
 
