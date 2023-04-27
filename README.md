@@ -1,12 +1,12 @@
-# Python抓取豆瓣图书、影视导入Notion
+# Python 抓取豆瓣图书、影视导入Notion
 
-利用 python 通过 Notion API 将豆瓣图书及影视信息导入 Notion，具体导入格式请参考下方模板的数据库样式。
+利用 python 通过 Notion API 将豆瓣图书及影视信息导入 Notion，包括：书籍、电视剧及电影。
 
-![demo](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/14_demo.gif)
 
 ## Dependencies
 - `beautifulsoup4`
 - `requests`
+- `gooey`
 
 ## Quickstart
 
@@ -42,14 +42,24 @@
 
 ### 运行脚本
 
-1. 修改脚本中 `NOTION_API_TOKEN` 和所需的 `DATABASE_ID` 变量的值
+1. 修改 `constant.py` 中 `NOTION_API_TOKEN` 和所需的 `DATABASE_ID` 变量的值
     
     ![TOKEN](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/14_T6LzEG.png)
-    
-2. 运行以下命令：
-    > python douban2notion.py -m [mode] -s [subject_id]
-    - `-h`: 帮助
-    - `-m`: book / movie / tv
-    - `-s`: subject_id
 
+2. 安装所需依赖
+    ```
+    pip install -r requirements.txt
+    ```
+
+3. 运行主程序，选择运行模式，并输入 `subject_id`（可输入多个，注意用英文逗号 `,` 隔开）
+    ```
+    python douban2notion.py
+    ```
     ![subject_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png)
+
+4. （可选）用 `pyinstaller` 打包成可执行程序
+    ```
+    pip install pyinstaller
+    pyinstaller -Fw douban2notion.py 
+    ```
+
