@@ -3,10 +3,11 @@
 利用 python 通过 Notion API 将豆瓣图书及影视信息导入 Notion，包括：书籍、电视剧及电影。
 
 
-## Dependencies
+## Dependences
 - `beautifulsoup4`
 - `requests`
 - `gooey`
+- `pyinstaller`(Optional)
 
 ## Quickstart
 
