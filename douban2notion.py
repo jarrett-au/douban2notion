@@ -1,7 +1,8 @@
-from gooey import Gooey, GooeyParser
-from bs4 import BeautifulSoup
-from constant import *
+import os
+import json
 import requests
+from bs4 import BeautifulSoup
+from gooey import Gooey, GooeyParser
 
 
 class Parser:
@@ -70,8 +71,6 @@ class Parser:
     def movie_parser(self):
         soup = BeautifulSoup(self.get_html(), "lxml")
         # 提取电影名称，封面，评分
-        # mainpic = soup.find("div", id="mainpic")
-        # movie_name = mainpic.img["alt"]
         movie_img = soup.find("div", id="mainpic").img["src"]
         movie_name = soup.find("meta", property="og:title")["content"]
         movie_score = soup.find("div", id="interest_sectl").find("strong").text
@@ -123,7 +122,7 @@ class Parser:
         return body
 
 
-def update_notion_database(url, mode):
+def update_notion_database(url, mode, NOTION_API_TOKEN, BOOK_DATABASE_ID, MOVIE_DATABASE_ID, TV_DATABASE_ID):
     """
     更新notion数据库
     """
@@ -162,13 +161,57 @@ def update_notion_database(url, mode):
 
 @Gooey(language="chinese", program_name="Douban2Notion")
 def main():
+    # 检查是否存在配置文件
+    config_file = "config.json"
+    if os.path.exists(config_file):
+        with open(config_file, "r") as f:
+            config = json.load(f)
+    else:
+        config = {}
+
     # 命令行参数
     arg_parser = GooeyParser(description="Douban to Notion App!")
     arg_parser.add_argument(
         "Mode", default="movie", choices=["book", "movie", "tv"], help="选择导入类型"
     )
     arg_parser.add_argument("Subject_ID", help="输入subject_id，若有多个请以英文逗号分隔")
+    arg_parser.add_argument(
+        "--NOTION_API_TOKEN",
+        default=config.get("NOTION_API_TOKEN", ""),
+        help="输入NOTION_API_TOKEN",
+        widget="PasswordField",
+    )
+    arg_parser.add_argument(
+        "--BOOK_DATABASE_ID",
+        default=config.get("BOOK_DATABASE_ID", ""),
+        help="输入BOOK_DATABASE_ID",
+    )
+    arg_parser.add_argument(
+        "--MOVIE_DATABASE_ID",
+        default=config.get("MOVIE_DATABASE_ID", ""),
+        help="输入MOVIE_DATABASE_ID",
+    )
+    arg_parser.add_argument(
+        "--TV_DATABASE_ID",
+        default=config.get("TV_DATABASE_ID", ""),
+        help="输入TV_DATABASE_ID",
+    )
     args = arg_parser.parse_args()
+
+    # 读取命令行参数
+    NOTION_API_TOKEN = args.NOTION_API_TOKEN or config.get("NOTION_API_TOKEN", "")
+    BOOK_DATABASE_ID = args.BOOK_DATABASE_ID or config.get("BOOK_DATABASE_ID", "")
+    MOVIE_DATABASE_ID = args.MOVIE_DATABASE_ID or config.get("MOVIE_DATABASE_ID", "")
+    TV_DATABASE_ID = args.TV_DATABASE_ID or config.get("TV_DATABASE_ID", "")
+
+    # 保存参数设置
+    config["NOTION_API_TOKEN"] = NOTION_API_TOKEN
+    config["BOOK_DATABASE_ID"] = BOOK_DATABASE_ID
+    config["MOVIE_DATABASE_ID"] = MOVIE_DATABASE_ID
+    config["TV_DATABASE_ID"] = TV_DATABASE_ID
+    with open(config_file, "w") as f:
+        json.dump(config, f)
+
     mode = args.Mode
     if mode == "book":
         opt = "book"
@@ -180,10 +223,10 @@ def main():
         ls_id = subject_id.split(",")
         for id in ls_id:
             url = f"https://www.douban.com/{opt}/subject/{id.strip()}/"
-            update_notion_database(url, mode)
+            update_notion_database(url, mode, NOTION_API_TOKEN, BOOK_DATABASE_ID, MOVIE_DATABASE_ID, TV_DATABASE_ID)
     else:
         url = f"https://www.douban.com/{opt}/subject/{subject_id}/"
-        update_notion_database(url, mode)
+        update_notion_database(url, mode, NOTION_API_TOKEN, BOOK_DATABASE_ID, MOVIE_DATABASE_ID, TV_DATABASE_ID)
 
 
 if __name__ == "__main__":
