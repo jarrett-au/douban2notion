@@ -17,7 +17,7 @@
     
 2. 获取 `Token` 值，并复制记录，如：
     
-    !https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled.png
+    ![notion_token](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled.png)
     
 
 ### Duplicate 模板
@@ -33,11 +33,11 @@
     - [🎬电影模板](https://www.notion.so/3fb8fbaea4574c73959f55f6745b9565?pvs=21)
 2. 在模板页面点击 **Share** 按钮将刚创建的机器人 `Invite` 进去：
     
-    !https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%201.png
+    ![invite_bot](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%201.png)
     
 3. 获取模板的 `database_id` ，并复制记录，如：
     
-    !https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%202.png
+    ![database_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%202.png)
     
 
 ### 运行脚本
@@ -55,7 +55,7 @@ pip install -r requirements.txt
     python douban2notion.py
     ```
     
-    !https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png
+    ![subject_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png)
     
 3. （可选）下载可执行程序，或者自行 `pyinstaller` 打包
     
