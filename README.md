@@ -24,7 +24,6 @@
 
 <aside>
 ⚠️ 注意：模板数据库中的属性与python文件中的body属性为一一对应关系，如需编辑得一并修改。
-
 </aside>
 
 1. 按需Duplicate以下模板：
@@ -43,13 +42,11 @@
 ### 运行脚本
 
 1. 安装所需依赖
-
-```bash
-pip install -r requirements.txt
-```
-
-1. 运行主程序，如果是第一次运行会提示输入 `NOTION_API_TOKEN`、`BOOK_DATABASE_ID`、`MOVIE_DATABASE_ID` 和 `TV_DATABASE_ID`，生成的配置文件 `config.json` 默认保存到相同目录下
-2. 选择运行模式，并输入 `subject_id`（可输入多个，注意用英文逗号 `,` 隔开）
+    ```bash
+    pip install -r requirements.txt
+    ```
+2. 运行主程序，如果是第一次运行会提示输入 `NOTION_API_TOKEN`、`BOOK_DATABASE_ID`、`MOVIE_DATABASE_ID` 和 `TV_DATABASE_ID`，生成的配置文件 `config.json` 默认保存到相同目录下
+3. 选择运行模式，并输入 `subject_id`（可输入多个，注意用英文逗号 `,` 隔开）
     
     ```bash
     python douban2notion.py
@@ -57,7 +54,7 @@ pip install -r requirements.txt
     
     ![subject_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png)
     
-3. （可选）[下载](https://github.com/jarrett-au/douban2notion/releases/tag/v1.0.0)可执行程序，或者自行 `pyinstaller` 打包
+4. （可选）[下载](https://github.com/jarrett-au/douban2notion/releases/tag/v1.0.0)可执行程序，或者自行 `pyinstaller` 打包
     
     ```bash
     pip install pyinstaller
