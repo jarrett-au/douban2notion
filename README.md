@@ -57,7 +57,7 @@ pip install -r requirements.txt
     
     ![subject_id](https://raw.githubusercontent.com/jarrett-au/img_bed/master/2022/02/10_Untitled%204.png)
     
-3. （可选）下载可执行程序，或者自行 `pyinstaller` 打包
+3. （可选）[下载](https://github.com/jarrett-au/douban2notion/releases/tag/v1.0.0)可执行程序，或者自行 `pyinstaller` 打包
     
     ```bash
     pip install pyinstaller
